@@ -77,7 +77,7 @@ sch 线程 rollover 模式切换开关
 
 // static uint32_t cycle_weights[MAX_TENANT_NUM] = {60, 40};
 // static uint32_t cycle_weights[MAX_TENANT_NUM] = {30, 70};
-static uint32_t cycle_weights[MAX_TENANT_NUM] = {3, 2};
+static uint32_t cycle_weights[MAX_TENANT_NUM] = {2, 2};
 
 // static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {40, 60};
 static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {1, 1};
