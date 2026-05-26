@@ -44,9 +44,17 @@ sch 线程每秒钟汇报租户实际主导资源使用比例 D 的开关
 #define SCH_DRF_D_REPORT 0
 
 /*
-sch 线程 rollover 模式切换开关 - 是否切换到 work-conserving 模式
+sch 线程 rollover 模式切换开关
+0: 关闭 work-conserving
+1: 仅启用溢出桶借用
+2: 启用溢出桶借用 + DRF 重分配
 */
-#define SCH_ROLLOVER_WORK_CONSERVING 1
+#define SCH_ROLLOVER_MODE_OFF 0
+#define SCH_ROLLOVER_MODE_BUCKET 1
+#define SCH_ROLLOVER_MODE_DRF 2
+#ifndef SCH_ROLLOVER_WORK_CONSERVING
+#define SCH_ROLLOVER_WORK_CONSERVING SCH_ROLLOVER_MODE_DRF
+#endif
 
 #define assert_debug 0
 
