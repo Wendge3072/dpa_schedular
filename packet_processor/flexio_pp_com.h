@@ -37,7 +37,7 @@
 #include <stdint.h>
 
 /* Scheduler configurations */
-#define MAX_SCHEDULER_QUEUES 16
+#define MAX_SCHEDULER_QUEUES 64
 #define WORKER_QUEUES_PER_THREAD 2
 #define MAX_TENANT_NUM 2
 #define DPA_FREQ_HZ 1800000000ULL  // 1.8GHz
