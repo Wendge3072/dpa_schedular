@@ -111,8 +111,11 @@ sch_init_cycle_accounting(struct dpa_sche_context *sch_ctx,
 	int sch_id = data_from_host->sch_id;
 	size_t tenants_num = data_from_host->tenants_num;
 	size_t threads_num_per_scheduler = data_from_host->threads_num_per_scheduler;
+	size_t max_cycle_percentage = data_from_host->buffer_location ?
+				      MAX_CYCLE_PERCENTAGE_DPU_MEM :
+				      MAX_CYCLE_PERCENTAGE_DPA_HEAP;
 	size_t base_cycle_budget = 
-		SCHED_PERIOD_CYCLES * threads_num_per_scheduler * MAX_CYCLE_PERCENTAGE / MAX_CYCLE_TOTAL;
+		SCHED_PERIOD_CYCLES * threads_num_per_scheduler * max_cycle_percentage / MAX_CYCLE_TOTAL;
 	uint32_t sum_weight = 0;
 
 	if (tenants_num > MAX_TENANT_NUM) {
