@@ -71,6 +71,8 @@ worker_cycle_report_print(int thd_id,
 		       flexio_dev_cqe_get_owner(rq_queue->rq_cq_ctx.cqe) != \
 		       rq_queue->rq_cq_ctx.cq_hw_owner_bit) { \
 			packet_size = _queue_fn(dtctx, thd_ctx, rq_queue, tx_sq_ctx, tx_sq_number); \
+			queue_cycles += 1400; \
+			WORKER_CYCLE_REPORT_ACCUMULATE(thd_ctx, q, cycle_delta); \
 			pkt_count++; \
 			if (pkt_count >= WORKER_BATCH_SIZE) { \
 				goto worker_sleep; \
