@@ -38,11 +38,7 @@ worker_cycle_report_print(int thd_id,
 	worker_cycle_report_accumulate((_thd_ctx), (_q), (_cycle_delta))
 #else
 #define WORKER_CYCLE_REPORT_ACCUMULATE(_thd_ctx, _q, _cycle_delta) \
-	do { \
-		(void)(_thd_ctx); \
-		(void)(_q); \
-		(void)(_cycle_delta); \
-	} while (0)
+
 #endif
 
 #define WORKER_DRAIN_QUEUE(_queue_fn) \
