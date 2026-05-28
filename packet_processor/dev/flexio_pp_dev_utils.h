@@ -52,7 +52,7 @@ sch 线程 rollover 模式切换开关
 #define SCH_ROLLOVER_MODE_BUCKET 1
 #define SCH_ROLLOVER_MODE_DRF 2
 #ifndef SCH_ROLLOVER_WORK_CONSERVING
-#define SCH_ROLLOVER_WORK_CONSERVING SCH_ROLLOVER_MODE_OFF
+#define SCH_ROLLOVER_WORK_CONSERVING SCH_ROLLOVER_MODE_DRF
 #endif
 
 #define assert_debug 0
@@ -77,10 +77,10 @@ sch 线程 rollover 模式切换开关
 
 // static uint32_t cycle_weights[MAX_TENANT_NUM] = {60, 40};
 // static uint32_t cycle_weights[MAX_TENANT_NUM] = {30, 70};
-static uint32_t cycle_weights[MAX_TENANT_NUM] = {1, 2};
+static uint32_t cycle_weights[MAX_TENANT_NUM] = {1, 1};
 
 // static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {40, 60};
-static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {1, 2};
+static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {1, 1};
 // static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {30, 60};
 
 enum pp_workload_type {
