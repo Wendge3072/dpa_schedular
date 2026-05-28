@@ -54,7 +54,6 @@ worker_cycle_report_print(int thd_id,
 			cycle_delta = __dpa_thread_cycles() - cycle_delta; \
 			queue_cycles += cycle_delta; \
 			WORKER_CYCLE_REPORT_ACCUMULATE(thd_ctx, q, cycle_delta); \
-
 			pkt_count++; \
 			if (pkt_count >= WORKER_BATCH_SIZE) { \
 				goto worker_sleep; \
