@@ -81,7 +81,7 @@ sch 线程 rollover 模式切换开关
 static uint32_t cycle_weights[MAX_TENANT_NUM] = {1, 1};
 
 // static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {40, 60};
-static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {1, 1};
+static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {1, 2};
 // static uint32_t bandwidth_weights[MAX_TENANT_NUM] = {30, 60};
 
 enum pp_workload_type {
