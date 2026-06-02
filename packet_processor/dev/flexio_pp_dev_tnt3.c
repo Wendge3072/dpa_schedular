@@ -41,23 +41,38 @@ worker_cycle_report_print(int thd_id,
 
 #endif
 
+// #define WORKER_DRAIN_QUEUE(_queue_fn) \
+// 	do { \
+// 		while (queue_cycles < WORKER_QUEUE_POLL_CYCLE_LIMIT && \
+// 		       flexio_dev_cqe_get_owner(rq_queue->rq_cq_ctx.cqe) != \
+// 		       rq_queue->rq_cq_ctx.cq_hw_owner_bit) { \
+// 			if (__atomic_load_n(restricted, __ATOMIC_RELAXED)) { \
+// 				break; \
+// 			} \
+// 			cycle_delta = __dpa_thread_cycles(); \
+// 			packet_size = _queue_fn(dtctx, thd_ctx, rq_queue, tx_sq_ctx, tx_sq_number); \
+// 			cycle_delta = __dpa_thread_cycles() - cycle_delta; \
+// 			queue_cycles += cycle_delta; \
+// 			WORKER_CYCLE_REPORT_ACCUMULATE(thd_ctx, q, cycle_delta); \
+// 			__atomic_fetch_add(&sch_ctx->tenant_cycle_consumed[q], cycle_delta, \
+// 					   __ATOMIC_RELAXED); \
+// 			__atomic_fetch_add(&sch_ctx->tenant_bw_consumed[q], packet_size, \
+// 					   __ATOMIC_RELAXED); \
+// 			pkt_count++; \
+// 			if (pkt_count >= WORKER_BATCH_SIZE) { \
+// 				goto worker_sleep; \
+// 			} \
+// 		} \
+// 	} while (0)
+
+
 #define WORKER_DRAIN_QUEUE(_queue_fn) \
 	do { \
 		while (queue_cycles < WORKER_QUEUE_POLL_CYCLE_LIMIT && \
 		       flexio_dev_cqe_get_owner(rq_queue->rq_cq_ctx.cqe) != \
 		       rq_queue->rq_cq_ctx.cq_hw_owner_bit) { \
-			if (__atomic_load_n(restricted, __ATOMIC_RELAXED)) { \
-				break; \
-			} \
-			cycle_delta = __dpa_thread_cycles(); \
-			packet_size = _queue_fn(dtctx, thd_ctx, rq_queue, tx_sq_ctx, tx_sq_number); \
-			cycle_delta = __dpa_thread_cycles() - cycle_delta; \
-			queue_cycles += cycle_delta; \
-			WORKER_CYCLE_REPORT_ACCUMULATE(thd_ctx, q, cycle_delta); \
-			__atomic_fetch_add(&sch_ctx->tenant_cycle_consumed[q], cycle_delta, \
-					   __ATOMIC_RELAXED); \
-			__atomic_fetch_add(&sch_ctx->tenant_bw_consumed[q], packet_size, \
-					   __ATOMIC_RELAXED); \
+			_queue_fn(dtctx, thd_ctx, rq_queue, tx_sq_ctx, tx_sq_number); \
+			queue_cycles += 1400; \
 			pkt_count++; \
 			if (pkt_count >= WORKER_BATCH_SIZE) { \
 				goto worker_sleep; \
