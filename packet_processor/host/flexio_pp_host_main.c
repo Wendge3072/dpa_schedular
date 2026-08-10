@@ -3,7 +3,7 @@
 #include <string.h>
 
 size_t scheduler_num = 1;
-size_t tenants_num = 2;
+size_t tenants_num = MAX_TENANT_NUM;
 size_t threads_num_per_scheduler = 8;
 size_t threads_num = 0;
 size_t begin_schedr = 0;
@@ -229,6 +229,12 @@ int main(int argc, char **argv)
     if (argc > 3) {
         tenants_num = atoi(argv[3]);
     }
+
+	if (tenants_num != MAX_TENANT_NUM) {
+		printf("Invalid tenants_num value. This version requires exactly %d tenants.\n",
+		       MAX_TENANT_NUM);
+		return -1;
+	}
 
 	if (argc > 4) {
 		threads_num_per_scheduler = atoi(argv[4]);
